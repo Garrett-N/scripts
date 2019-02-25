@@ -1,0 +1,13 @@
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+# handle git config
+cp $HOME/.gitconfig-gneuenkirchen $HOME/.gitconfig
+
+# ssh agent to handle the ssh keys
+ssh-add -D
+ssh-add ~/.ssh/id_rsa
+
+# good to go
+echo remember to use: 
+echo     git clone git@github.com${bold}-rs${normal}: blah...
