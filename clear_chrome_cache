@@ -1,0 +1,42 @@
+# clear_chrome_cache
+# 04 APR 2020
+# 
+# Chrome keeps lots of things on my main laptop
+# This is taylored for my main laptop - will write something
+# more generic in the furture if needed
+#
+# Motovation:
+# I was suprised to see that even when I uninstall chrome or clear 
+# the cache, there are a huge amount of javascript files that are stored
+# in ~/Library/Caches/Google/Chrome/$PROFILE/Code Cache/js
+#
+echo WARNING!!
+echo This script will blow away your local chrome profile and
+echo chrome cache that is not clearable inside chrome or by 
+echo uninstalling chrome. 
+echo Recommend quitting chrome before continuing.
+echo
+
+# Removing these directories
+dir1="$HOME/Library/Caches/Google/Chrome"
+dir2="$HOME/Library/Application Support/Google/Chrome"
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+echo ${bold}Target directories to clean.${normal}
+du -sh "$dir1"
+du -sh "$dir2"
+echo
+
+read -p "Proceed? (y/n) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi 
+
+echo Deleting $DIR1...
+rm -rf "$dir1"
+rm -rf "$dir2"
+echo ${bold}done.${normal}
